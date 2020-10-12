@@ -29,8 +29,9 @@
     padding: 30px;
 }
 .grid{
-    align-self: center;
-    justify-self: center;
+/*     align-self: center;
+    justify-self: center; */
+    text-align: center;
     font-size: 30px;
     padding: 60px;
    /*  border: 1px solid white; */
