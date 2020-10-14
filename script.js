@@ -1,16 +1,28 @@
 const gameBoard = (() => {
-    let arrayGB = [];
-    const gameElement = index => {
-        const gridID = document.getElementById('grid'+index);
-        let value = '';
+    const arrayGameElements = [];
+    gameElement = index => {
+        this.gridID = document.getElementById('grid'+index);
+        //_bindEvents();
+        this.gridID.addEventListener('click', _render.bind(this));
+        this.value = '';
         return {gridID, value};
     };
-    //populates the game elements
-    for(i = 0; i < 9; i++){
-        arrayGB[i] = gameElement(i);
-        if(i%2===0){arrayGB[i].value = 'X';}
-        else{arrayGB[i].value = 'O';}
-        arrayGB[i].gridID.textContent = arrayGB[i].value;
-    }
-    console.table(arrayGB);
+    const _cacheDom = index => {
+        //this.gridID = tihs.document.getElementById('grid'+index);
+    };
+    const _bindEvents = () => {
+    };
+    function _render(event) {
+        console.log(event.target);
+        event.target.textContent = 'X';
+    };
+
+    const  _populateArray = () => {
+        for(i = 0; i < 9; i++){ arrayGameElements[i] = gameElement(i);}
+    };
+    const getGameElement = index => arrayGameElements[index];
+    _populateArray();
+    console.table(arrayGameElements);
 })();
+
+
