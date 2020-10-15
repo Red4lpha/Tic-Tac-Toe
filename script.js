@@ -10,19 +10,28 @@ const gameBoard = (() => {
     const _cacheDom = index => {
         //this.gridID = tihs.document.getElementById('grid'+index);
     };
-    const _bindEvents = () => {
-    };
-    function _render(event) {
-        console.log(event.target);
-        event.target.textContent = 'X';
+    const _bindEvents = () => {};
+    const _render =  event => {
+        if(event.target.textContent != ''){console.log("space already filled");}
+        else {event.target.textContent = 'X';}
     };
 
-    const  _populateArray = () => {
-        for(i = 0; i < 9; i++){ arrayGameElements[i] = gameElement(i);}
-    };
+    const  _populateArray = () => {for(i = 0; i < 9; i++) {arrayGameElements[i] = gameElement(i);} };
     const getGameElement = index => arrayGameElements[index];
     _populateArray();
     console.table(arrayGameElements);
 })();
 
+const player = (isFirstPlayer) => {
+    const isfirstPlayer = isFirstPlayer;
+    let _score = 0;
+    const getScore = () => _score;
+    const increaseScore = () => {_score++;};
+    let _mark = isFirstPlayer ? 'X' : 'O'; 
+    const getMark = () => _mark;
+    
+    return {getScore, increaseScore, getMark}
+};
 
+let first = player(true);
+console.log(first.getScore());
