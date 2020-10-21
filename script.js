@@ -9,26 +9,32 @@ const gameBoard = (() => {
         this.value = '';
         return {gridID, value};
     };
-    const _render =  e => {
+    const _render = e => {
         if(e.target.textContent != ''){console.log("space already filled");}
         else {
             e.target.textContent = _lastValue === 'O'? 'X' : 'O';
             _lastValue = e.target.textContent;
             let temp = e.target.id.replace( /^\D+/g, '');
+            if (temp => 0 && temp < 9) {arrayGameElements[temp].value = e.target.textContent;}
             console.log(temp);
-            
+            console.table(arrayGameElements);
         }
     };
     const  _populateArray = () => {for(i = 0; i < 9; i++) {arrayGameElements[i] = gameElement(i);} };
     const getGameElement = index => arrayGameElements[index];
-    const resetBoard = () => {};
+    const resetBoard = () => {
+        _lastValue = 'O';
+        for(i = 0; i < 9; i++) {
+            arrayGameElements[i].gridID.textContent = '';
+            arrayGameElements[i].value = '';
+        }
+    };
     _populateArray();
-    console.table(arrayGameElements);
+    
     //Reserved methods:
     const _cacheDom = index => {};
     const _bindEvents = () => {};
-
-
+    return {resetBoard}
 })();
 
 const player = (isFirstPlayer) => {
@@ -44,3 +50,5 @@ const player = (isFirstPlayer) => {
 
 let first = player(true);
 console.log(first.getScore());
+const button = document.getElementById('start');
+button.addEventListener('click', gameBoard.resetBoard);
